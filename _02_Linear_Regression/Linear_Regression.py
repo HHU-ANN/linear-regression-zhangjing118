@@ -26,8 +26,8 @@ def lasso(data):
     x, y = read_data()
     w = np.random.rand(1, 6)
     a = 0.5
-    p = data @ (np.dot(x.T, (y - np.dot(w, x.T)).T))
-    z = np.dot(x, x.T)
+    p = data @ (np.dot(x.T, y - np.dot(w,x.T)))
+    z = np.dot(data, data.T)
     if p < (-0.5 * a):
         return (p + 0.5 * a) / z
     elif p > (0.5 * a):
