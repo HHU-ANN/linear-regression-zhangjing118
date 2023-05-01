@@ -12,6 +12,8 @@ except ImportError as e:
 
 def ridge(data):
     x, y = read_data()
+    x = np.array(x)
+    y = np.array(y)
     a = 0.5
     E = np.eye(np.linalg.inv(np.dot(x.T, x)))
     return np.dot(np.linalg.inv(np.dot(x, x.T) + np.dot(a, E)), np.dot(x, y))
@@ -19,6 +21,8 @@ def ridge(data):
 
 def lasso(data):
     x, y = read_data()
+    x=np.array(x)
+    y=np.array(y)
     w = np.random.rand(1, 6)
     a = 0.5
     p = np.dot(x.T, y - np.dot(x.T, w))
