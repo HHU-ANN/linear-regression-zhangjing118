@@ -10,13 +10,13 @@ except ImportError as e:
     import numpy as np
 
 
-def ridge(x, y):
+def ridge(data):
     a = 0.5
     E = np.eye(np.linalg.inv(np.dot(x.T, x)))
     return np.dot(np.linalg.inv(np.dot(x, x.T) + np.dot(a, E)), np.dot(x, y))
 
 
-def lasso(x, y):
+def lasso(data):
     w = np.random.rand(1, 6)
     a = 0.5
     p = np.dot(x.T, y - np.dot(x.T, w))
