@@ -25,14 +25,14 @@ def model1(x, y):
 def lasso(data):
     x, y = read_data()
     weight=model2(x,y)
-    return data@weight
+    return data @ weight
 
 
 def model2(x,y):
     w = np.random.rand(1, 6)
     a = 0.5
-    p = np.dot(x.T, y - np.dot(x.T, w))
-    z = np.dot(x.T, x)
+    p = np.dot(x.T, y - np.dot(w, x.T))
+    z = np.dot(x, x.T)
     if p < (-0.5 * a):
         return (p + 0.5 * a) / z
     elif p > (0.5 * a):
