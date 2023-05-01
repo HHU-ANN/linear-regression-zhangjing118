@@ -15,7 +15,7 @@ def ridge(data):
     x = np.array(x)
     y = np.array(y)
     a = 0.5
-    E = np.eye(np.linalg.inv(np.dot(x.T, x)))
+    E = np.eye(6)
     return np.dot(np.linalg.inv(np.dot(x, x.T) + np.dot(a, E)), np.dot(x, y))
 
 
