@@ -12,21 +12,23 @@ except ImportError as e:
 
 def ridge(data):
     x, y = read_data()
-    weight = model(x, y)
+    weight = model1(x, y)
     return data @ weight
 
-lasso = ridge
 
-def model(x, y):
-    # 基础的最小二乘实现线性回归
-    # $(X^TX)^-1(X^Ty)$
-    return np.dot(np.linalg.inv(np.dot(x.T, x)), np.dot(x.T, y))
+def model1(x, y):
+    E=np.eye(6)
+    a=0.5
+    return np.dot(np.linalg.inv(np.dot(x.T, x)+a*E), np.dot(x.T, y))
 
 
 def lasso(data):
     x, y = read_data()
-    x=np.array(x)
-    y=np.array(y)
+    weight=model(x,y)
+    return data@weight
+
+
+def model2(x,y):
     w = np.random.rand(1, 6)
     a = 0.5
     p = np.dot(x.T, y - np.dot(x.T, w))
@@ -37,7 +39,6 @@ def lasso(data):
         return (p - 0.5 * a) / z
     else:
         return 0
-
 
 def read_data(path='./data/exp02/'):
     x = np.load(path + 'X_train.npy')
