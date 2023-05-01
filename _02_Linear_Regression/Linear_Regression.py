@@ -24,7 +24,7 @@ def model1(x, y):
 
 def lasso(data):
     x, y = read_data()
-    weight=model(x,y)
+    weight=model2(x,y)
     return data@weight
 
 
