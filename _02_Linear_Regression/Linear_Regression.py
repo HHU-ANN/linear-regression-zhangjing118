@@ -24,14 +24,9 @@ def model1(x, y):
 
 def lasso(data):
     x, y = read_data()
-    weight=model2(x,y)
-    return data @ weight
-
-
-def model2(x,y):
     w = np.random.rand(1, 6)
     a = 0.5
-    p = np.dot(x.T, y - np.dot(w, x.T))
+    p = data @ (np.dot(x.T, (y - np.dot(w, x.T)).T))
     z = np.dot(x, x.T)
     if p < (-0.5 * a):
         return (p + 0.5 * a) / z
@@ -39,7 +34,7 @@ def model2(x,y):
         return (p - 0.5 * a) / z
     else:
         return 0
-
+    
 def read_data(path='./data/exp02/'):
     x = np.load(path + 'X_train.npy')
     y = np.load(path + 'y_train.npy')
