@@ -24,16 +24,30 @@ def model1(x, y):
 
 def lasso(data):
     x, y = read_data()
-    w = np.random.rand(1, 6)
-    a = 0.5
-    p = data @ (y - np.dot(w,x.T))
-    z = np.dot(data, data.T)
-    if p < (-0.5 * a):
-        return (p + 0.5 * a) / z
-    elif p > (0.5 * a):
-        return (p - 0.5 * a) / z
-    else:
-        return 0
+    weight=model2(x,y,10,0.5)
+    return data @ weight
+
+
+def model2(X, y, iternum, lamda):
+    m, n = X.shape
+    theta = np.matrix(np.zeros((n, 1)))
+    # 循环
+    for it in range(iternum):
+        for k in range(n):  # n个特征
+            # 计算z_k和p_k
+            z_k = np.sum(np.power(X[:, k], 2))
+            p_k = 0
+            for i in range(m):
+                p_k += X[i, k] * (y[i, 0] - np.sum([X[i, j] * theta[j, 0] for j in range(n) if j != k]))
+            # 根据p_k的不同取值进行计算
+            if p_k < -lamda / 2:
+                w_k = (p_k + lamda / 2) / z_k
+            elif p_k > lamda / 2:
+                w_k = (p_k - lamda / 2) / z_k
+            else:
+                w_k = 0
+            theta[k, 0] = w_k
+    return theta
     
 def read_data(path='./data/exp02/'):
     x = np.load(path + 'X_train.npy')
