@@ -38,7 +38,7 @@ def model2(X, y, iternum, lamda):
             z_k = np.sum(np.power(X[:, k], 2))
             p_k = 0
             for i in range(m):
-                p_k += X[i, k] * (y[i, 0] - np.sum([X[i, j] * theta[j, 0] for j in range(n) if j != k]))
+                p_k += X[i, k] * (y[i] - np.sum([X[i, j] * theta[j] for j in range(n) if j != k]))
             # 根据p_k的不同取值进行计算
             if p_k < -lamda / 2:
                 w_k = (p_k + lamda / 2) / z_k
@@ -46,7 +46,7 @@ def model2(X, y, iternum, lamda):
                 w_k = (p_k - lamda / 2) / z_k
             else:
                 w_k = 0
-            theta[k, 0] = w_k
+            theta[k] = w_k
     return theta
     
 def read_data(path='./data/exp02/'):
