@@ -14,6 +14,7 @@ def ridge(data):
     x, y = read_data()
     x=preprocessing.scale(x)
     y = preprocessing.scale(y)
+
     weight = model1(x, y)
     return data @ weight
 
