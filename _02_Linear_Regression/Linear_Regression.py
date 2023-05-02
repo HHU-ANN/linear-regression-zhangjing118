@@ -8,10 +8,12 @@ try:
 except ImportError as e:
     os.system("sudo pip3 install numpy")
     import numpy as np
-
+from sklearn import preprocessing
 
 def ridge(data):
     x, y = read_data()
+    x=preprocessing.scale(x)
+    y = preprocessing.scale(y)
     weight = model1(x, y)
     return data @ weight
 
@@ -24,6 +26,8 @@ def model1(x, y):
 
 def lasso(data):
     x, y = read_data()
+    x = preprocessing.scale(x)
+    y = preprocessing.scale(y)
     weight=model2(x,y,10,0.01)
     return data @ weight
 
