@@ -2,18 +2,14 @@
 # 最终在main函数中传入一个维度为6的numpy数组，输出预测值
 
 import os
-
 try:
     import numpy as np
 except ImportError as e:
     os.system("sudo pip3 install numpy")
     import numpy as np
 
-
 def ridge(data):
     x, y = read_data()
-
-
     weight = model1(x, y)
     return data @ weight
 
@@ -26,7 +22,7 @@ def model1(x, y):
 
 def lasso(data):
     x, y = read_data()
-    
+    m, n = x.shape
     weight=model2(x,y,10,0.01)
     return data @ weight
 
